@@ -5,11 +5,11 @@ namespace GoldenLilies.Models
     public class Lokacija
     {
         [Key]
-        private int ID { get; set; }
-        private string naziv { get; set; }
-        private string grad { get; set; }
-        private string drzava { get; set; }
-        private string informacija { get; set; }
+        public int ID { get; set; }
+        public string naziv { get; set; }
+        public string grad { get; set; }
+        public string drzava { get; set; }
+        public string informacija { get; set; }
         public Lokacija() { }
     }
 }

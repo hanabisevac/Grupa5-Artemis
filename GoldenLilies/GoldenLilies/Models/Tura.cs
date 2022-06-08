@@ -8,12 +8,12 @@ namespace GoldenLilies.Models
     public class Tura
     {
         [Key]
-        private int ID { get; set; }
+        public int ID { get; set; }
         [ForeignKey("Korisnik")]
-        private int vodicID { get; set; }
-        private DateTime vrijeme { get; set; }
-        private string informacije { get; set; }
-        private Korisnik korisnik { get; set; }
+        public int vodicID { get; set; }
+        public DateTime vrijeme { get; set; }
+        public string informacije { get; set; }
+        public Korisnik korisnik { get; set; }
         public Tura() { }
 
     }

@@ -5,8 +5,8 @@ namespace GoldenLilies.Models
     public class VrstaAtrakcije
     {
         [Key]
-        private int ID { get; set; }
-        private string naziv { get; set; }
+        public int ID { get; set; }
+        public string naziv { get; set; }
         public VrstaAtrakcije() { }
     }
 }

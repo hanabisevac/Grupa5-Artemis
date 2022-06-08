@@ -5,7 +5,7 @@ namespace GoldenLilies.Models
     public class VrstaKorisnika
     {
         [Key]
-        private int ID { get; set; }
-        private string naziv { get; set; }
+        public int ID { get; set; }
+        public string naziv { get; set; }
     }
 }

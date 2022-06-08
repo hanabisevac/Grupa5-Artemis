@@ -6,18 +6,18 @@ namespace GoldenLilies.Models
     public class Korisnik
     {
         [Key]
-        private int ID { get; set; }
-        private string ime { get; set; }
-        private string prezime { get; set; }
-        private string email { get; set; }
-        private string password { get; set; }
+        public int ID { get; set; }
+        public string ime { get; set; }
+        public string prezime { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
         [ForeignKey("Lokacija")]
-        private string adresaID { get; set; }
-        private Lokacija lokacija { get; set; }
-        private string telefon { get; set; }
+        public string adresaID { get; set; }
+        public Lokacija lokacija { get; set; }
+        public string telefon { get; set; }
         [ForeignKey("VrstaKorisnika")]
-        private int aspNetUsersID { get; set; }
-        private VrstaKorisnika vrstaKorisnika { get; set; }
+        public int aspNetUsersID { get; set; }
+        public VrstaKorisnika vrstaKorisnika { get; set; }
         public Korisnik() { }
     }
 }

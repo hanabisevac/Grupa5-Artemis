@@ -7,13 +7,13 @@ namespace GoldenLilies.Models
 
     {
         [Key]
-        private int ID { get; set; }
+        public int ID { get; set; }
         [ForeignKey("Atrakcija")]
-        private int atrakcijaID { get; set; }
+        public int atrakcijaID { get; set; }
         [ForeignKey("Tura")]
-        private int turaID { get; set; }
-        private Atrakcija atrakcija { get; set; }
-        private Tura tura { get; set; }
+        public int turaID { get; set; }
+        public Atrakcija atrakcija { get; set; }
+        public Tura tura { get; set; }
 
         public AtrakcijeTure() { }
     }

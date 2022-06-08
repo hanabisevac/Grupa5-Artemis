@@ -6,13 +6,13 @@ namespace GoldenLilies.Models
     public class Posjete
     {
         [Key]
-        private int ID { get; set; }
+        public int ID { get; set; }
         [ForeignKey("Korisnik")]
-        private int korisnikID { get; set; }
+        public int korisnikID { get; set; }
         [ForeignKey("Atrakcija")]
-        private int atrakcijaID { get; set; }
-        private Korisnik korisnik { get; set; }
-        private Atrakcija atrakcija { get; set; }
+        public int atrakcijaID { get; set; }
+        public Korisnik korisnik { get; set; }
+        public Atrakcija atrakcija { get; set; }
         public Posjete() { }
     }
 }

@@ -7,17 +7,17 @@ namespace GoldenLilies.Models
     public class Atrakcija
     {
         [Key]
-        private int ID { get; set; }    
-        private string naziv { get; set; }
+        public int ID { get; set; }    
+        public string naziv { get; set; }
         [ForeignKey("Lokacija")]
-        private int lokacijaID { get; set; }
+        public int lokacijaID { get; set; }
 
         [ForeignKey("VrstaAtrakcije")]
-        private int vrstaAtrakcijeID { get; set; }
-        private string informacije { get; set; }
-        private DateTime radnoVrijeme { get; set; }
-        private Lokacija lokacija { get; set; }
-        private VrstaAtrakcije vrstaAtrakcije { get; set; }
+        public int vrstaAtrakcijeID { get; set; }
+        public string informacije { get; set; }
+        public DateTime radnoVrijeme { get; set; }
+        public Lokacija lokacija { get; set; }
+        public VrstaAtrakcije vrstaAtrakcije { get; set; }
 
         public Atrakcija() { }
 
