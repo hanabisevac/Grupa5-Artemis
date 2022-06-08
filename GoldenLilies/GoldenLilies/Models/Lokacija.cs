@@ -1,10 +1,15 @@
-﻿namespace GoldenLilies.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GoldenLilies.Models
 {
     public class Lokacija
     {
-        private string naziv;
-        private string grad;
-        private string drzava;
-        private string informacija;
+        [Key]
+        private int ID { get; set; }
+        private string naziv { get; set; }
+        private string grad { get; set; }
+        private string drzava { get; set; }
+        private string informacija { get; set; }
+        public Lokacija() { }
     }
 }
