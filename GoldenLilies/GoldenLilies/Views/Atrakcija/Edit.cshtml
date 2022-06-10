@@ -1,0 +1,54 @@
+﻿@model GoldenLilies.Models.Atrakcija
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Atrakcija</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="naziv" class="control-label"></label>
+                <input asp-for="naziv" class="form-control" />
+                <span asp-validation-for="naziv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lokacijaID" class="control-label"></label>
+                <select asp-for="lokacijaID" class="form-control" asp-items="ViewBag.lokacijaID"></select>
+                <span asp-validation-for="lokacijaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="vrstaAtrakcijeID" class="control-label"></label>
+                <select asp-for="vrstaAtrakcijeID" class="form-control" asp-items="ViewBag.vrstaAtrakcijeID"></select>
+                <span asp-validation-for="vrstaAtrakcijeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="informacije" class="control-label"></label>
+                <input asp-for="informacije" class="form-control" />
+                <span asp-validation-for="informacije" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="radnoVrijeme" class="control-label"></label>
+                <input asp-for="radnoVrijeme" class="form-control" />
+                <span asp-validation-for="radnoVrijeme" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
