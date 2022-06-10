@@ -10,22 +10,22 @@ using GoldenLilies.Models;
 
 namespace GoldenLilies.Controllers
 {
-    public class UpravljanjeKorisnickimRacunomController : Controller
+    public class TuraController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public UpravljanjeKorisnickimRacunomController(ApplicationDbContext context)
+        public TuraController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: UpravljanjeKorisnickimRacunom
+        // GET: Tura
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Korisnik.ToListAsync());
+            return View(await _context.Tura.ToListAsync());
         }
 
-        // GET: UpravljanjeKorisnickimRacunom/Details/5
+        // GET: Tura/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace GoldenLilies.Controllers
                 return NotFound();
             }
 
-            var korisnik = await _context.Korisnik
+            var tura = await _context.Tura
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (korisnik == null)
+            if (tura == null)
             {
                 return NotFound();
             }
 
-            return View(korisnik);
+            return View(tura);
         }
 
-        // GET: UpravljanjeKorisnickimRacunom/Create
+        // GET: Tura/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: UpravljanjeKorisnickimRacunom/Create
+        // POST: Tura/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ime,prezime,email,password,adresaID,telefon,aspNetUsersID")] Korisnik korisnik)
+        public async Task<IActionResult> Create([Bind("ID,vodicID,vrijeme,informacije")] Tura tura)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(korisnik);
+                _context.Add(tura);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(korisnik);
+            return View(tura);
         }
 
-        // GET: UpravljanjeKorisnickimRacunom/Edit/5
+        // GET: Tura/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace GoldenLilies.Controllers
                 return NotFound();
             }
 
-            var korisnik = await _context.Korisnik.FindAsync(id);
-            if (korisnik == null)
+            var tura = await _context.Tura.FindAsync(id);
+            if (tura == null)
             {
                 return NotFound();
             }
-            return View(korisnik);
+            return View(tura);
         }
 
-        // POST: UpravljanjeKorisnickimRacunom/Edit/5
+        // POST: Tura/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ime,prezime,email,password,adresaID,telefon,aspNetUsersID")] Korisnik korisnik)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,vodicID,vrijeme,informacije")] Tura tura)
         {
-            if (id != korisnik.ID)
+            if (id != tura.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace GoldenLilies.Controllers
             {
                 try
                 {
-                    _context.Update(korisnik);
+                    _context.Update(tura);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KorisnikExists(korisnik.ID))
+                    if (!TuraExists(tura.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace GoldenLilies.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(korisnik);
+            return View(tura);
         }
 
-        // GET: UpravljanjeKorisnickimRacunom/Delete/5
+        // GET: Tura/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace GoldenLilies.Controllers
                 return NotFound();
             }
 
-            var korisnik = await _context.Korisnik
+            var tura = await _context.Tura
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (korisnik == null)
+            if (tura == null)
             {
                 return NotFound();
             }
 
-            return View(korisnik);
+            return View(tura);
         }
 
-        // POST: UpravljanjeKorisnickimRacunom/Delete/5
+        // POST: Tura/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var korisnik = await _context.Korisnik.FindAsync(id);
-            _context.Korisnik.Remove(korisnik);
+            var tura = await _context.Tura.FindAsync(id);
+            _context.Tura.Remove(tura);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool KorisnikExists(int id)
+        private bool TuraExists(int id)
         {
-            return _context.Korisnik.Any(e => e.ID == id);
+            return _context.Tura.Any(e => e.ID == id);
         }
     }
 }
