@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<GoldenLilies.Models.Atrakcija>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pretraži atrakcije u BiH";
 }
 
-<h1>Index</h1>
+<h1
+    style="text-align: left; font-family:Arial; color: #275F76 "> Pretraga atrakcija u BiH
+</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -27,7 +29,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.vrstaAtrakcije)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
