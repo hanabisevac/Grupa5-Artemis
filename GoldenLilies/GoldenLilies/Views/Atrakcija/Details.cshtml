@@ -5,7 +5,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Html.DisplayFor(model => model.naziv)</h1>
 
 <div>
     <h4>Atrakcija</h4>
@@ -45,5 +45,7 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to List</a> |
+    <a asp-area="" asp-controller="Fotografija" asp-action="Index">Fotografije</a>
+
 </div>

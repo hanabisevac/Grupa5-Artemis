@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GoldenLilies.Models.Fotografija>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Fotografije";
 }
 
 <h1>Index</h1>
@@ -18,9 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.verifikovano)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.korisnik)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.atrakcija)
             </th>
@@ -31,16 +31,17 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.putanja)
+                <img width="200px" height="150px" src="@Url.Action("Fotografija", "Fotografija", new {item.ID})" />
+                @*@Html.DisplayFor(modelItem => item.putanja)*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.verifikovano)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.korisnik.ID)
-            </td>
+            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.atrakcija.ID)
+                @Html.DisplayFor(modelItem => item.atrakcija.naziv)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
