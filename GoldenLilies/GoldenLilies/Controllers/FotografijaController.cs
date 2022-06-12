@@ -67,8 +67,8 @@ namespace GoldenLilies.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "ID", fotografija.atrakcijaID);
-            ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", fotografija.korisnikID);
+            ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "naziv", fotografija.atrakcijaID);
+            //ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", fotografija.korisnikID);
             return View(fotografija);
         }
 
@@ -85,8 +85,8 @@ namespace GoldenLilies.Controllers
             {
                 return NotFound();
             }
-            ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "ID", fotografija.atrakcijaID);
-            ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", fotografija.korisnikID);
+            ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "naziv", fotografija.atrakcijaID);
+            //ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", fotografija.korisnikID);
             return View(fotografija);
         }
 
@@ -123,7 +123,7 @@ namespace GoldenLilies.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "ID", fotografija.atrakcijaID);
-            ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", fotografija.korisnikID);
+            //ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", fotografija.korisnikID);
             return View(fotografija);
         }
 
@@ -137,7 +137,7 @@ namespace GoldenLilies.Controllers
 
             var fotografija = await _context.Fotografija
                 .Include(f => f.atrakcija)
-                .Include(f => f.korisnik)
+                //.Include(f => f.korisnik)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (fotografija == null)
             {
