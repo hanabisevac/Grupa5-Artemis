@@ -13,9 +13,11 @@ namespace GoldenLilies.Models
         [DisplayName("Naziv atrakcije")]
         public string naziv { get; set; }
         [ForeignKey("Lokacija")]
+        [Display(Name ="Lokacija")]
         public int lokacijaID { get; set; }
 
         [ForeignKey("VrstaAtrakcije")]
+        [Display(Name = "Vrsta atrakcije")]
         public int vrstaAtrakcijeID { get; set; }
         
         [DisplayName("Osnovne informacije")]

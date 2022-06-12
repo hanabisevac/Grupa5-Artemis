@@ -34,10 +34,14 @@ namespace GoldenLilies.Controllers
                 return NotFound();
             }
 
+            //var fkLokacije = await _context.Atrakcija.Include(a => a.lokacijaID).FirstOrDefaultAsync(m => m.ID == id);
+            //var imeLokacije = await _context.Lokacija.Include(i => i.naziv).FirstOrDefaultAsync(m => m.ID == fkLokacije.lokacijaID);
+
             var atrakcija = await _context.Atrakcija
                 .Include(a => a.lokacija)
                 .Include(a => a.vrstaAtrakcije)
                 .FirstOrDefaultAsync(m => m.ID == id);
+                
             if (atrakcija == null)
             {
                 return NotFound();
@@ -49,8 +53,8 @@ namespace GoldenLilies.Controllers
         // GET: Atrakcija/Create
         public IActionResult Create()
         {
-            ViewData["lokacijaID"] = new SelectList(_context.Lokacija, "ID", "ID");
-            ViewData["vrstaAtrakcijeID"] = new SelectList(_context.VrstaAtrakcije, "ID", "ID");
+            ViewData["lokacijaID"] = new SelectList(_context.Lokacija, "ID", "naziv");
+            ViewData["vrstaAtrakcijeID"] = new SelectList(_context.VrstaAtrakcije, "ID", "naziv");
             return View();
         }
 
