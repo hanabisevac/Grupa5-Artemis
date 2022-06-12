@@ -46,6 +46,7 @@ namespace GoldenLilies.Controllers
         }
 
         // GET: Tura/Create
+        [Authorize(Roles ="Vodic")]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +57,7 @@ namespace GoldenLilies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Vodic")]
         public async Task<IActionResult> Create([Bind("ID,vodicID,vrijeme,informacije")] Tura tura)
         {
             if (ModelState.IsValid)
@@ -68,6 +70,7 @@ namespace GoldenLilies.Controllers
         }
 
         // GET: Tura/Edit/5
+        [Authorize(Roles ="Vodic")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,6 +91,7 @@ namespace GoldenLilies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Vodic")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,vodicID,vrijeme,informacije")] Tura tura)
         {
             if (id != tura.ID)
@@ -119,6 +123,7 @@ namespace GoldenLilies.Controllers
         }
 
         // GET: Tura/Delete/5
+        [Authorize(Roles = "Vodic")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,6 +144,7 @@ namespace GoldenLilies.Controllers
         // POST: Tura/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Vodic")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tura = await _context.Tura.FindAsync(id);

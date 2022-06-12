@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GoldenLilies.Data;
 using GoldenLilies.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GoldenLilies.Controllers
 {
@@ -75,6 +76,7 @@ namespace GoldenLilies.Controllers
         }
 
         // GET: Fotografija/Edit/5
+        [Authorize(Roles ="Zaposlenik")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,6 +99,7 @@ namespace GoldenLilies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Zaposlenik")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,putanja,korisnikID,atrakcijaID,verifikovano")] Fotografija fotografija)
         {
             if (id != fotografija.ID)
@@ -130,6 +133,7 @@ namespace GoldenLilies.Controllers
         }
 
         // GET: Fotografija/Delete/5
+        [Authorize(Roles = "Zaposlenik")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -152,6 +156,7 @@ namespace GoldenLilies.Controllers
         // POST: Fotografija/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Zaposlenik")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var fotografija = await _context.Fotografija.FindAsync(id);
