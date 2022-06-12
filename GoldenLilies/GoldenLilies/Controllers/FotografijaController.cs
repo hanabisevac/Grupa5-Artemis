@@ -23,7 +23,9 @@ namespace GoldenLilies.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Fotografija.Include(f => f.atrakcija).Include(f => f.korisnik);
-            return View(await applicationDbContext.ToListAsync());
+            var niz =  await applicationDbContext.ToListAsync();
+            
+            return View(niz);
         }
 
         // GET: Fotografija/Details/5

@@ -18,9 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.verifikovano)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.korisnik)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.atrakcija)
             </th>
@@ -31,8 +31,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @*<img width="200px" height="150px" src="@Html.DisplayFor(modelItem => item.p)" />*@
-                @Html.DisplayFor(modelItem => item.putanja)
+                <img width="200px" height="150px" src="@Html.DisplayFor(modelItem => item.putanja)" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.verifikovano)
