@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GoldenLilies.Data;
 using GoldenLilies.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GoldenLilies.Controllers
 {
+    [Authorize]
     public class TuraController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -31,8 +31,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @*<img width="200px" height="150px" src="@Html.DisplayFor(modelItem => item.p)" />*@
-                @Html.DisplayFor(modelItem => item.putanja)
+                <img width="200px" height="150px" src="@Html.DisplayFor(modelItem => item.putanja)" />
+                @*@Html.DisplayFor(modelItem => item.putanja)*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.verifikovano)
@@ -44,9 +44,14 @@
                 @Html.DisplayFor(modelItem => item.atrakcija.naziv)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    @if (User.IsInRole("Zaposlenik"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> 
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    }
+                  
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
+              
             </td>
         </tr>
 }
