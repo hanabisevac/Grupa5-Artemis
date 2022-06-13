@@ -42,7 +42,7 @@ namespace GoldenLilies.Controllers
                 .Include(a => a.lokacija)
                 .Include(a => a.vrstaAtrakcije)
                 .FirstOrDefaultAsync(m => m.ID == id);
-                
+
             if (atrakcija == null)
             {
                 return NotFound();
@@ -173,5 +173,21 @@ namespace GoldenLilies.Controllers
         {
             return _context.Atrakcija.Any(e => e.ID == id);
         }
+        public async Task<IActionResult> Pretrazi(string searchString)
+        {
+            var movies = from m in _context.Atrakcija
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.naziv!.Contains(searchString));
+            }
+
+            return View(await movies.ToListAsync());
+        }
     }
+
+    
+
+      
 }
