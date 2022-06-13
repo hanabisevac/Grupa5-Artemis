@@ -1,0 +1,58 @@
+﻿@model IEnumerable<GoldenLilies.Models.Fotografija>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Fotografije</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.putanja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.verifikovano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.korisnik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.atrakcija)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img width="200px" height="150px" src="@Html.DisplayFor(modelItem => item.putanja)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.verifikovano)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.korisnik.ID)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.atrakcija.naziv)
+            </td>
+            <td>
+                    @if (User.IsInRole("Zaposlenik"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> 
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    }
+                  
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
+              
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -169,5 +169,21 @@ namespace GoldenLilies.Controllers
         {
             return _context.Fotografija.Any(e => e.ID == id);
         }
+
+        public async Task<IActionResult> FotografijeAtrakcije(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var veza = _context.Fotografija.Where(f => f.atrakcijaID == id);
+            if(veza == null)
+            {
+                return NotFound();
+            }
+            var niz = await veza.ToListAsync();
+            return View(niz);
+
+        }
     }
 }

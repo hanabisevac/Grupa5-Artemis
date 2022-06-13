@@ -49,7 +49,9 @@
      <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>   
     }
     <a asp-action="Index">Back to List</a> |
-    <a asp-controller="Fotografija" asp-action="Index">Fotografije</a>
+    <form asp-controller="Fotografija" asp-action="FotografijeAtrakcije" asp-route-id="@Model.ID"> 
+         <input type="submit"  value="Fotografije"></input>
+         </form>
      @if (User.IsInRole("Registrovani Korisnik"))
                     {
                         <button type="button">Fotografiši</button>
