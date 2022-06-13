@@ -165,14 +165,18 @@ namespace GoldenLilies.Controllers
                 return NotFound();
             }
             Console.WriteLine("tu sam");
-            var tura = await _context.AtrakcijeTure
-                .FirstOrDefaultAsync(m => m.atrakcijaID == id);
-            if (tura == null)
+            var veza =  _context.AtrakcijeTure.Where( m => m.atrakcijaID == id).Include(t=> t.tura);
+            if (veza == null)
             {
                 return NotFound();
             }
 
-            return View(tura);
+            var lista = veza.ToList();
+            List<Tura> ture = new List<Tura>();
+            for (int i = 0; i < lista.Count; i++) {
+                ture.Add(lista.ElementAt(i).tura);
+            }
+            return View(ture);
         }
     }
 }
