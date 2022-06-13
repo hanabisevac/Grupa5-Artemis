@@ -175,15 +175,15 @@ namespace GoldenLilies.Controllers
         }
         public async Task<IActionResult> Pretrazi(string searchString)
         {
-            var movies = from m in _context.Atrakcija
+            var atrakcije = from m in _context.Atrakcija
                          select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(s => s.naziv!.Contains(searchString));
+                atrakcije = atrakcije.Where(s => s.naziv!.Contains(searchString));
             }
 
-            return View(await movies.ToListAsync());
+            return View(await atrakcije.ToListAsync());
         }
     }
 

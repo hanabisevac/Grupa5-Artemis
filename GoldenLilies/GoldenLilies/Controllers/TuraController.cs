@@ -157,5 +157,22 @@ namespace GoldenLilies.Controllers
         {
             return _context.Tura.Any(e => e.ID == id);
         }
+
+        public async Task<IActionResult> TureAtrakcije(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Console.WriteLine("tu sam");
+            var tura = await _context.AtrakcijeTure
+                .FirstOrDefaultAsync(m => m.atrakcijaID == id);
+            if (tura == null)
+            {
+                return NotFound();
+            }
+
+            return View(tura);
+        }
     }
 }

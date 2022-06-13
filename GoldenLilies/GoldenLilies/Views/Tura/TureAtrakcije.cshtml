@@ -1,0 +1,56 @@
+﻿@model IEnumerable<GoldenLilies.Models.Tura>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    @if (User.IsInRole("Vodic"))
+    {
+         <a asp-action="Create">Create New</a>
+    }
+   
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.vodicID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vrijeme)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.informacije)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.vodicID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vrijeme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.informacije)
+            </td>
+            <td>
+                @if (User.IsInRole("Vodic"))
+                {
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> 
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                 }
+                
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
