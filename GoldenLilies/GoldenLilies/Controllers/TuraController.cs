@@ -164,7 +164,7 @@ namespace GoldenLilies.Controllers
             {
                 return NotFound();
             }
-            Console.WriteLine("tu sam");
+            Console.WriteLine("tu sam" + id);
             var veza =  _context.AtrakcijeTure.Where( m => m.atrakcijaID == id).Include(t=> t.tura);
             if (veza == null)
             {

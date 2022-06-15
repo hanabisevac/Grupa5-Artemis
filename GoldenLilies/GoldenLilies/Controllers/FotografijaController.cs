@@ -24,8 +24,8 @@ namespace GoldenLilies.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Fotografija.Include(f => f.atrakcija).Include(f => f.korisnik);
-            var niz =  await applicationDbContext.ToListAsync();
-            
+            var niz = await applicationDbContext.ToListAsync();
+
             return View(niz);
         }
 
@@ -50,11 +50,11 @@ namespace GoldenLilies.Controllers
         }
 
         // GET: Fotografija/Create
-        public IActionResult Create()
+        public IActionResult Create(int id,int korisnik)
         {
-            ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "ID");
+            ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "ID",id);
+  
             ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID");
-            Console.WriteLine("tutu");
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace GoldenLilies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,putanja,korisnikID,atrakcijaID,verifikovano")] Fotografija fotografija)
+        public async Task<IActionResult> CreatePhoto([Bind("ID,putanja,korisnikID,atrakcijaID,verifikovano")] Fotografija fotografija)
         {
             if (ModelState.IsValid)
             {
