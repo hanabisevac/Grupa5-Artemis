@@ -10,42 +10,51 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-            <label asp-for="putanja" class="control-label"></label>
-            <input asp-for="putanja" class="form-control" style="visibility: hidden"/>
-            <span asp-validation-for="putanja" class="text-danger"></span>
-        <div style="padding: 1rem; display: grid; grid-template-columns: 50% 50%">
- <div id="results">Slika će se prikazati ovdje...</div>
- <div style="margin-left: 20rem">
- <div id="my_camera"></div>
- <script type="text/javascript" src="~/js/webcam.min.js"></script>
- <script>
- Webcam.set({
- width: 320,
- height: 240,
- image_format: 'jpeg',
- jpeg_quality: 90
- });
- Webcam.attach( '#my_camera' );
- </script>
- <script>
- function take_snapshot() {
- Webcam.snap(function(data_uri)
- {
- document.getElementById('results').innerHTML = '<img
-src="' + data_uri + '"/>';
- document.getElementById('Slika').value = data_uri;
- });
- }
- </script>
+         <form asp-action="Create">
+                 <label asp-for="putanja" class="control-label"></label>
+                <input asp-for="putanja" class="form-control" style="visibility: hidden"/>
+                <span asp-validation-for="putanja" class="text-danger"></span>
+                <label asp-for="korisnikID" class="control-label"></label>
+                <select asp-for="korisnikID" class ="form-control" asp-items="ViewBag.korisnikID"></select>
+                <span asp-validation-for="korisnikID" class="text-danger"></span>
+                <label asp-for="atrakcijaID" class="control-label"></label>
+                <select asp-for="atrakcijaID" class ="form-control" asp-items="ViewBag.atrakcijaID"></select>
+                <span asp-validation-for="atrakcijaID" class="text-danger"></span>
+                <div style="padding: 1rem; display: grid; grid-template-columns: 50% 50%">
+                    <div id="results">Slika će se prikazati ovdje...</div>
 
- <input type=button id="takeshot" class="btn btn-primary"
-value="Uslikaj" onClick="take_snapshot()">
- </div>
-</div>
-    </div>
-</div>
+                    <div style="margin-left: 20rem">
+                        <div id="my_camera"></div>
 
-<div>
+                        <script type="text/javascript" src="~/js/webcam.min.js"></script>
+
+                        <script>
+                            Webcam.set({
+                                width: 320,
+                                height: 240,
+                                image_format: 'jpeg',
+                                jpeg_quality: 90
+                            });
+                            Webcam.attach( '#my_camera' );
+                        </script>
+
+                        <script>
+                            function take_snapshot() {
+                                Webcam.snap(function(data_uri)
+                                {
+                                    document.getElementById('results').innerHTML = '<img src="' + data_uri + '"/>';
+                                    document.getElementById('putanja').value = data_uri;
+                                });
+                            }
+                        </script>
+
+                        <input type=button id="takeshot" class="btn btn-primary" value="Uslikaj" onClick="take_snapshot()">
+                    </div>
+                     <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+                </div>
+    </form>
     <a asp-action="Index">Back to List</a>
 </div>
 
