@@ -11,23 +11,25 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GoldenLilies.Controllers
 {
-    [Authorize]
-    public class TuraController : Controller
+    public class PrijavljeniController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public TuraController(ApplicationDbContext context)
+        public PrijavljeniController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Tura
+        // GET: Prijavljeni
+        [Authorize(Roles ="Vodic")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tura.ToListAsync());
+            var applicationDbContext = _context.Prijavljeni.Include(p => p.korisnik).Include(p => p.tura);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Tura/Details/5
+        // GET: Prijavljeni/Details/5
+        [Authorize(Roles = "Vodic")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,42 +37,48 @@ namespace GoldenLilies.Controllers
                 return NotFound();
             }
 
-            var tura = await _context.Tura
+            var prijavljeni = await _context.Prijavljeni
+                .Include(p => p.korisnik)
+                .Include(p => p.tura)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (tura == null)
+            if (prijavljeni == null)
             {
                 return NotFound();
             }
 
-            return View(tura);
+            return View(prijavljeni);
         }
 
-        // GET: Tura/Create
-        [Authorize(Roles ="Vodic")]
+        // GET: Prijavljeni/Create
+        [Authorize(Roles = "Vodic")]
         public IActionResult Create()
         {
+            ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID");
+            ViewData["turaID"] = new SelectList(_context.Tura, "ID", "ID");
             return View();
         }
 
-        // POST: Tura/Create
+        // POST: Prijavljeni/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles ="Vodic")]
-        public async Task<IActionResult> Create([Bind("ID,vodicID,vrijeme,informacije")] Tura tura)
+        [Authorize(Roles = "Vodic")]
+        public async Task<IActionResult> Create([Bind("ID,korisnikID,turaID")] Prijavljeni prijavljeni)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tura);
+                _context.Add(prijavljeni);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tura);
+            ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", prijavljeni.korisnikID);
+            ViewData["turaID"] = new SelectList(_context.Tura, "ID", "ID", prijavljeni.turaID);
+            return View(prijavljeni);
         }
 
-        // GET: Tura/Edit/5
-        [Authorize(Roles ="Vodic")]
+        // GET: Prijavljeni/Edit/5
+        [Authorize(Roles = "Vodic")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,23 +86,25 @@ namespace GoldenLilies.Controllers
                 return NotFound();
             }
 
-            var tura = await _context.Tura.FindAsync(id);
-            if (tura == null)
+            var prijavljeni = await _context.Prijavljeni.FindAsync(id);
+            if (prijavljeni == null)
             {
                 return NotFound();
             }
-            return View(tura);
+            ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", prijavljeni.korisnikID);
+            ViewData["turaID"] = new SelectList(_context.Tura, "ID", "ID", prijavljeni.turaID);
+            return View(prijavljeni);
         }
 
-        // POST: Tura/Edit/5
+        // POST: Prijavljeni/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Vodic")]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,vodicID,vrijeme,informacije")] Tura tura)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,korisnikID,turaID")] Prijavljeni prijavljeni)
         {
-            if (id != tura.ID)
+            if (id != prijavljeni.ID)
             {
                 return NotFound();
             }
@@ -103,12 +113,12 @@ namespace GoldenLilies.Controllers
             {
                 try
                 {
-                    _context.Update(tura);
+                    _context.Update(prijavljeni);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TuraExists(tura.ID))
+                    if (!PrijavljeniExists(prijavljeni.ID))
                     {
                         return NotFound();
                     }
@@ -119,10 +129,12 @@ namespace GoldenLilies.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tura);
+            ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID", prijavljeni.korisnikID);
+            ViewData["turaID"] = new SelectList(_context.Tura, "ID", "ID", prijavljeni.turaID);
+            return View(prijavljeni);
         }
 
-        // GET: Tura/Delete/5
+        // GET: Prijavljeni/Delete/5
         [Authorize(Roles = "Vodic")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -131,71 +143,33 @@ namespace GoldenLilies.Controllers
                 return NotFound();
             }
 
-            var tura = await _context.Tura
+            var prijavljeni = await _context.Prijavljeni
+                .Include(p => p.korisnik)
+                .Include(p => p.tura)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (tura == null)
+            if (prijavljeni == null)
             {
                 return NotFound();
             }
 
-            return View(tura);
+            return View(prijavljeni);
         }
 
-        // POST: Tura/Delete/5
+        // POST: Prijavljeni/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Vodic")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tura = await _context.Tura.FindAsync(id);
-            _context.Tura.Remove(tura);
+            var prijavljeni = await _context.Prijavljeni.FindAsync(id);
+            _context.Prijavljeni.Remove(prijavljeni);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TuraExists(int id)
+        private bool PrijavljeniExists(int id)
         {
-            return _context.Tura.Any(e => e.ID == id);
+            return _context.Prijavljeni.Any(e => e.ID == id);
         }
-
-        public async Task<IActionResult> TureAtrakcije(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            Console.WriteLine("tu sam");
-            var veza =  _context.AtrakcijeTure.Where( m => m.atrakcijaID == id).Include(t=> t.tura);
-            if (veza == null)
-            {
-                return NotFound();
-            }
-
-            var lista = veza.ToList();
-            List<Tura> ture = new List<Tura>();
-            for (int i = 0; i < lista.Count; i++) {
-                ture.Add(lista.ElementAt(i).tura);
-            }
-            return View(ture);
-        }
-
-        public async Task<IActionResult> TureZaPrijavljene(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ture = _context.Tura.Where(m => m.ID == id);
-            //.FirstOrDefaultAsync(m => m.ID == id);
-            if (ture == null)
-            {
-                return NotFound();
-            }
-
-            return View(ture.ToListAsync());
-        }
-
-
     }
 }

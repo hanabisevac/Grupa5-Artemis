@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoldenLilies.Models
 {
+    [DisplayName("Atrakcija")]
     public class Atrakcija
     {
         [Key]

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoldenLilies.Models
 {
+    [Display(Name ="Korisnik")]
     public class Korisnik
     {
         [Key]

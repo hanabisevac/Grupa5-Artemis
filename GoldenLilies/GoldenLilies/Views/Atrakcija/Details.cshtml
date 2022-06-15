@@ -54,12 +54,13 @@
          </form> 
          <a asp-controller="Fotografija" asp-action="Create" >Fotografiši</a>
          
-     @if (User.IsInRole("Registrovani Korisnik"))
+     @if (User.IsInRole("Korisnik"))
                     {
-                       
-                    }
-     <form asp-controller="Tura" asp-action="TureAtrakcije" asp-route-id="@Model.ID"> 
+                        <form asp-controller="Tura" asp-action="TureAtrakcije" asp-route-id="@Model.ID"> 
          <input type="submit"  value="Pregled tura za atrakciju"></input>
          </form>
+                       
+                    }
+     
     
 </div>

@@ -1,0 +1,39 @@
+﻿@model GoldenLilies.Models.Prijavljeni
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Prijavljeni</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="korisnikID" class="control-label"></label>
+                <select asp-for="korisnikID" class="form-control" asp-items="ViewBag.korisnikID"></select>
+                <span asp-validation-for="korisnikID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="turaID" class="control-label"></label>
+                <select asp-for="turaID" class="form-control" asp-items="ViewBag.turaID"></select>
+                <span asp-validation-for="turaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
