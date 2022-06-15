@@ -54,6 +54,7 @@ namespace GoldenLilies.Controllers
         {
             ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "ID");
             ViewData["korisnikID"] = new SelectList(_context.Korisnik, "ID", "ID");
+            Console.WriteLine("tutu");
             return View();
         }
 

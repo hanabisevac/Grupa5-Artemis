@@ -51,10 +51,12 @@
     <a asp-action="Index">Back to List</a> |
     <form asp-controller="Fotografija" asp-action="FotografijeAtrakcije" asp-route-id="@Model.ID"> 
          <input type="submit"  value="Fotografije"></input>
-         </form>
+         </form> 
+         <a asp-controller="Fotografija" asp-action="Create" >Fotografiši</a>
+         
      @if (User.IsInRole("Registrovani Korisnik"))
                     {
-                        <button type="button">Fotografiši</button>
+                       
                     }
      <form asp-controller="Tura" asp-action="TureAtrakcije" asp-route-id="@Model.ID"> 
          <input type="submit"  value="Pregled tura za atrakciju"></input>
