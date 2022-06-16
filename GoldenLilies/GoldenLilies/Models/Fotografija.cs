@@ -8,6 +8,7 @@ namespace GoldenLilies.Models
     {
         [Key]
         public int ID { get; set; }
+        [DisplayName("Fotografija")]
         public string putanja { get; set; }
         [ForeignKey("Korisnik")]
         [DisplayName("Korisnik")]

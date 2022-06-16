@@ -177,7 +177,7 @@ namespace GoldenLilies.Controllers
             {
                 return NotFound();
             }
-            var veza = _context.Fotografija.Where(f => f.atrakcijaID == id);
+            var veza = _context.Fotografija.Where(f => f.atrakcijaID == id).Include(f => f.atrakcija);
             if(veza == null)
             {
                 return NotFound();

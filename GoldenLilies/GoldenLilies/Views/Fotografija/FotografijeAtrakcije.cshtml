@@ -9,18 +9,21 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.putanja)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.verifikovano)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.korisnik)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.atrakcija)
             </th>
@@ -33,9 +36,9 @@
             <td>
                 <img width="200px" height="150px" src="@Html.DisplayFor(modelItem => item.putanja)" />
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.verifikovano)
-            </td>
+            </td>*@
             @*<td>
                 @Html.DisplayFor(modelItem => item.korisnik.ime)
             </td>*@
@@ -49,10 +52,14 @@
                         <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                     }
                   
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> 
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                <form asp-controller="Atrakcija" asp-action="Details" asp-route-id="@item.atrakcijaID">
+                    <input type="submit"  value="Back"></input>
+         </form> 
               
             </td>
         </tr>
 }
+
     </tbody>
 </table>

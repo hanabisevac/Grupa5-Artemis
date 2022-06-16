@@ -25,9 +25,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.drzava)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.informacija)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -42,9 +39,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.drzava)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.informacija)
             </td>
             <td>
                 @if (User.IsInRole("Administrator"))
