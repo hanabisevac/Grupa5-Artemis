@@ -50,6 +50,7 @@ namespace GoldenLilies.Controllers
         }
 
         // GET: Fotografija/Create
+        [Authorize(Roles = "Korisnik")]
         public IActionResult Create(int id,int korisnik)
         {
             ViewData["atrakcijaID"] = new SelectList(_context.Atrakcija, "ID", "ID",id);
@@ -63,6 +64,7 @@ namespace GoldenLilies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Korisnik")]
         public async Task<IActionResult> CreatePhoto([Bind("ID,putanja,korisnikID,atrakcijaID,verifikovano")] Fotografija fotografija)
         {
             if (ModelState.IsValid)

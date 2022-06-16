@@ -7,7 +7,11 @@
 <h1>Fotografije</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (User.IsInRole("Korisnik"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+    
 </p>
 
 

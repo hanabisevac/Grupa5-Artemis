@@ -24,6 +24,7 @@ namespace GoldenLilies.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Atrakcija.Include(a => a.lokacija).Include(a => a.vrstaAtrakcije);
+            Console.WriteLine(User.Identity);
             return View(await applicationDbContext.ToListAsync());
         }
 
